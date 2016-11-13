@@ -50,6 +50,36 @@ def shell_sort(list_):
 
     return list_
 
+def bubble_sort(list_):
+    length = len(list_)
+    for i in range(length-1):
+        for j in range(length-1-i):
+            if list_[j] > list_[j+1]:
+                exchange(list_, j, j+1)
+    return list_
+
+def radix_sort(list_):
+    pass
+
+def merge_sort(list_):
+    pass
+
+def heap_sort(list_):
+    pass
+
+def quick_sort(list_):
+    #recursive method
+    
+    if len(list_) <= 1:
+        return list_
+    else:
+        pivot = list_[0] #基准
+        return quick_sort([x for x in list_[1:] if x < pivot]) + \
+              [pivot] + \
+              quick_sort([x for x in list_[1:] if x >= pivot])
+
+#O(nlogn)
+
 def sort_test(*funcs):
     list_ = list(range(1000))
     random.shuffle(list_)
@@ -61,20 +91,6 @@ def sort_test(*funcs):
             print('algorithm {} not pass'.format(func.__name__))
 
 if __name__ == '__main__':
+    pass
 
-    sort_test(select_sort, insert_sort, shell_sort)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
+    #sort_test(select_sort, insert_sort, shell_sort, quick_sort)
