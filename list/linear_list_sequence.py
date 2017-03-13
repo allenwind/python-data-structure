@@ -1,15 +1,16 @@
 #实现线性表， 连续储存方法，区别与链表方法
 
 
+#线性表的实现-->顺序表 这种方式类似于C语言中的数组
 class List(object):
     def __init__(self):
         self._list = []
 
     @classmethod
     def create(cls, list):
-        self._list = []
-        self._list.extend(list)
-        return cls
+        cls._list = []
+        cls._list.extend(list)
+        return cls()
 
     def is_empty(self):
         pass
