@@ -97,7 +97,11 @@ def build_complete_tree(root, data, rest):
         root.right = BinTreeNode(value)
 
 def preorder_traver(tree):
-    pass
+    if tree is None:
+        return 
+    print(tree.data)
+    preorder_traver(tree.left)
+    preorder_traver(tree.right)
 
 def inorder_traver(tree):
     pass
@@ -106,4 +110,75 @@ def postorder_traver(tree):
     pass
 
 def layer_traver(tree):
+    pass
+
+def deep_traver(tree):
+    pass
+
+
+#create binary tree by list
+
+def Tree(data, *subtrees):
+    return [data].extend(subtrees)
+
+def is_empty_Tree(tree):
+    return tree is None
+
+def root(tree):
+    return tree[0]
+
+def subtree(tree, i):
+    return tree[i+1]
+
+def set_root(tree, data):
+    tree[0] = data
+
+def set_subtree(tree, i, subtree):
+    tree[i+1] = subtree
+
+#use this method to build class Tree
+
+
+#线索二叉树的实现
+
+
+#二叉树类 from book
+class BinTree:
+    def __init__(self):
+        self._root = None
+
+    def is_empty(self):
+        return self._root is None
+
+    def root(self):
+        return self._root
+
+    def leftchild(self):
+        return self._root.left
+
+    def rightchild(self):
+        return self._root.right
+
+    def set_root(self, rootnode):
+        self._root = rootnode
+
+    def set_left(self, leftchild):
+        self._root.left = leftchild
+
+    def set_right(self, rightchild):
+        self._root.right = rightchild
+
+
+
+
+
+#森林转二叉树
+def fs_to_bintree():
+    pass
+
+#需要优先队列实现
+def huffmantree(weights):
+    pass
+
+def huffmancode(codes):
     pass
