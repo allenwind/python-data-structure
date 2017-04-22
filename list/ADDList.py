@@ -174,6 +174,7 @@ class DLNode:
         self._prev = None
         self._next = None
 
+
 #双链表线性表实现
 class DLinkList:
 
