@@ -24,6 +24,12 @@ class Dict(object):
             else:
                 return default
 
+    def __getattr__(self, key):
+        return self.get(key)
+
+    def __setattr__(self, key, value):
+        self.set(key, value) 
+
     def keys(self):
         return self._keys 
 
