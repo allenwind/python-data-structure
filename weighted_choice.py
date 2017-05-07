@@ -1,12 +1,9 @@
 #带权选择
+import bisect
+import random
+
 def weighted_choice(choices):
-    """Returns a value from choices chosen by weighted random selection
 
-    choices should be a list of (value, weight) tuples.
-
-    eg. weighted_choice([('val1', 5), ('val2', 0.3), ('val3', 1)])
-
-    """
     values, weights = zip(*choices)
     total = 0
     cum_weights = []
