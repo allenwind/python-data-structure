@@ -1,0 +1,149 @@
+# 这个实现参考自golang的container/list库
+
+class Element:
+
+    def __init__(self, next=None, prev=None, list=None, value=None):
+        self._next = next 
+        self._prev = prev
+        self._list = list 
+        self._value = value
+
+    def next(self):
+        p = self._next 
+        if self._list is not None and p != self._list.root:
+            return p 
+        return None 
+
+    def prev(self):
+        p = self._prev 
+        if self._list is not None and p != self._list.root:
+            return p
+        return None
+
+class List:
+
+    def __init__(self, root=None):
+        self._root = root 
+        self._len = 0
+
+    def init(self):
+        self._root = Element()
+        self._root._next = self._root 
+        self._root._prev = self._root
+        self._len = 0
+        return l
+
+    def len(self):
+        retuurn self._len
+
+    def front(self):
+        if self.len() == 0:
+            return None 
+        return self._root._next 
+
+    def back(self):
+        if self.len() == 0:
+            return None 
+        return self._root._prev
+
+    def _lazyinit(self):
+        if self._root._next is None:
+            self.init()
+
+    def _insert(self, e, at):
+        n = at._next 
+        at._next = e
+        e._prev = at 
+        e._next = n 
+        n._prev = e 
+        e._list = self
+        self._len += 1
+        return e
+
+    def _insertValue(self, value, at):
+        e = Element(value=value)
+        return self._insert(e, at)
+
+    def _remove(self, e):
+        e._prev._next = e._next 
+        e._next._prev = e._prev 
+        e._next = None 
+        e._prev = None 
+        e._list = None 
+        self._len -= 1
+        return e
+
+    def remove(self, e):
+        if e._list == self:
+            self._remove(e)
+        return e._value
+
+    def push_front(self, value):
+        self._lazyinit()
+        return self._insertValue(value, self._root)
+
+    def push_back(self, value):
+        self._lazyinit()
+        return self._insertValue(value,  self._root._prev)
+
+    def insert_before(self, value, mark):
+        if mark._list != self:
+            return None 
+        return self._insertValue(value, mark._prev)
+
+    def insert_after(self, value, mark):
+        if mark._list != self:
+            return None 
+        return self._insertValue(value, mark)
+
+    def move_to_front(self, e):
+        if e._list != self or self._root._next == e:
+            return 
+        self._insert(self._remove(e), self._root)
+
+    def move_to_back(self, e):
+        if e._list != self or self._root._prev == e:
+            return 
+        self._insert(self._remove(e), self._root._prev)
+
+    def move_before(self, e, mark):
+        if e._list != self or e == mark or mark._list != self:
+            return 
+        self._insert(self._remove(e), mark._prev)
+
+    def move_after(self, e, mark):
+        if e._list != self and e == mark and mark._list != self:
+            return 
+        self._insert(self._remove(e), mark)
+
+    def push_back_list(self, lst):
+        self._lazyinit()
+        i = lst.len()
+        e = lst.front()
+        while i > 0:
+            i -= 1
+            e = e.next()
+            self._insertValue(e._value, self._root._prev)
+
+    extend = self.push_back_list 
+
+    def push_front_list(self, lst):
+        self._lazyinit()
+        i = lst.len()
+        e = lst.back()
+        while i > 0:
+            i -= 1
+            e = e.prev()
+            self._insertValue(e._value, self._root)
+
+    extendleft = self.push_front_list
+
+
+def new_list():
+    return List().init()
+
+
+
+
+
+
