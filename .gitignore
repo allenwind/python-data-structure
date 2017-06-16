@@ -1,3 +1,5 @@
 read_python_ds/
 
+__pycache__/
+
 lru_algorithm.py
