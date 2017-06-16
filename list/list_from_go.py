@@ -8,15 +8,18 @@ class Element:
         self._list = list 
         self._value = value
 
+    def __repr__(self):
+        return "<Element value:%s>" % self._value
+
     def next(self):
         p = self._next 
-        if self._list is not None and p != self._list.root:
+        if self._list is not None and p != self._list._root:
             return p 
         return None 
 
     def prev(self):
         p = self._prev 
-        if self._list is not None and p != self._list.root:
+        if self._list is not None and p != self._list._root:
             return p
         return None
 
@@ -31,10 +34,10 @@ class List:
         self._root._next = self._root 
         self._root._prev = self._root
         self._len = 0
-        return l
+        return self
 
     def len(self):
-        retuurn self._len
+        return self._len
 
     def front(self):
         if self.len() == 0:
@@ -46,6 +49,9 @@ class List:
             return None 
         return self._root._prev
 
+    def __repr__(self):
+        return "<List-len:%s>" % self.len()
+                                  
     def _lazyinit(self):
         if self._root._next is None:
             self.init()
@@ -73,6 +79,9 @@ class List:
         self._len -= 1
         return e
 
+    def __len__(self):
+        return self.len()
+
     def remove(self, e):
         if e._list == self:
             self._remove(e)
@@ -82,9 +91,13 @@ class List:
         self._lazyinit()
         return self._insertValue(value, self._root)
 
+    appendleft = push_front
+
     def push_back(self, value):
         self._lazyinit()
         return self._insertValue(value,  self._root._prev)
+
+    append = push_back
 
     def insert_before(self, value, mark):
         if mark._list != self:
@@ -125,7 +138,7 @@ class List:
             e = e.next()
             self._insertValue(e._value, self._root._prev)
 
-    extend = self.push_back_list 
+    extend = push_back_list
 
     def push_front_list(self, lst):
         self._lazyinit()
@@ -136,11 +149,40 @@ class List:
             e = e.prev()
             self._insertValue(e._value, self._root)
 
-    extendleft = self.push_front_list
+    extendleft = push_front_list
 
+    def __iter__(self):
+        if self.len() == 0:
+            return
+        cursor = self._root._next
+        while cursor._value:
+            yield cursor._value
+            cursor = cursor._next
 
-def new_list():
-    return List().init()
+    def split(self, e):
+        # 在元素e出分割list
+        pass
+
+    def find(self, e):
+        pass
+
+    def index(self, e):
+        pass
+
+    def sort(self):
+        pass
+
+    @classmethod
+    def new(cls):
+        l = cls().init()
+        return l
+
+def new_list(size):
+    l = List().init()
+    for i in range(size):
+        l.append(i)
+    return l
+    
 
 
 

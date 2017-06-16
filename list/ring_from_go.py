@@ -7,7 +7,10 @@ class Ring:
     def _init(self):
         self._next = self 
         self._prev = self
-        return self 
+        return self
+
+    def __repr__(self):
+        return "<Ring value:%s>" % self._value
 
     def next(self):
         if self._next is None:
@@ -73,11 +76,12 @@ def new_ring(n):
         return None 
     r = Ring()
     p = r 
-    i = 1
-    while i < n:
-        i += 1
+    i = 0
+    while i < n-1:
+        p._value = i
         p._next = Ring(prev=p)
-        p = p._next 
+        p = p._next
+        i += 1
     p._next = r
     r._prev = p
     return r
