@@ -85,7 +85,11 @@ class List:
         self.insert(self.remove(node), self.root.prev)
 
     def __iter__(self):
-        pass
+        node = self.root.next
+        while node:
+            yield node
+            node = node.next
+            
 
 
 
