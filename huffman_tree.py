@@ -227,6 +227,29 @@ def compress_image(image=r'E:\picture\295.jpg'):
     fd.write(bytes(buffer))
     fd.close()
 
+import collections
+
+def print_tree_step(tree):
+    stack = collections.deque()
+    stack.append(tree)
+    next_level_count = 0
+    current_print_count = 1
+
+    while len(stack):
+        p_node = stack.popleft()
+        print(p_node, end='\t')
+        current_print_count -= 1
+        if p_node.left is not None:
+            next_level_count += 1
+            stack.append(p_node.left)
+        if p_node.right is not None:
+            next_level_count += 1
+            stack.append(p_node.right)
+        if current_print_count == 0:
+            current_print_count = next_level_count
+            next_level_count = 0
+            print('\n')
+
 if __name__ == '__main__':
     main()
 

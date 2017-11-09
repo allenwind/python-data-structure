@@ -194,6 +194,24 @@ class BinarySearchTree:
     def root(self):
         return self._root
 
+    def morror_tree(self):
+        '''
+        反转bst
+        '''
+        self._morror_tree(self._root)
+        return self.root
+
+    def _morror_tree(self, root):
+        if root is None:
+            return
+        if root.left is None and root.right is None:
+            return
+        root.left, root.right = root.right, root.left
+        if root.left:
+            self._morror_tree(root.left)
+        if root.right:
+            self._morror_tree(root.right)
+
 class TreeIterMixin:
 
     def preorder_traverse(self):
@@ -214,10 +232,10 @@ class TreeIterMixin:
 
     def _inorder(self, node):
         if node:
-            for x in self._preorder(node.left):
+            for x in self._inorder(node.left):
                 yield x
             yield node
-            for x in self._preorder(node.right):
+            for x in self._inorder(node.right):
                 yield x
 
     def postorder_traverse(self):
@@ -363,6 +381,36 @@ def make_dict(size):
         value = random.randint(1, 10000)
         d.insert(key, value)
     return d
+
+def tree_to_list(root):
+    node_iter = root.inorder_traverse()
+    p_node = next(node_iter)
+    head = p_node
+    for node in node_iter:
+        p_node.right = node
+        p_node.left = None
+        node.left = p_node
+        p_node = node
+    return head
+
+def test():
+    import random
+    
+    nums = list(range(1, 11))
+    t = Dict()
+    random.shuffle(nums)
+    for v in nums:
+        t.insert(v, v)
+
+    head = tree_to_list(t)
+    while head:
+        print(head)
+        head = head.right
+
+if __name__ == '__main__':
+    test()
+        
+    
 
 
 
