@@ -119,6 +119,6 @@ func generateHuffmanCodes(s string) map[string]string {
 }
 
 func main() {
-	codes := generateHuffmanCodes("littlefeng")
+	codes := generateHuffmanCodes("AAAABABABDDBACABCACDDBADDCBAAADBCC")
 	fmt.Println(codes)
 }
