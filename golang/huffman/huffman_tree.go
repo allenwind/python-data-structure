@@ -122,6 +122,7 @@ func main() {
 	codes := generateHuffmanCodes("mrfenglovechenchen")
 	fmt.Println(codes)
 }
+
 =======
 package main
 
