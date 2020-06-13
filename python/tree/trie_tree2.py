@@ -1,6 +1,6 @@
 
-class Node(object):
-    def __init__(self, value) -> None:
+class Node:
+    def __init__(self, value):
         self._children = {}
         self._value = value
 
@@ -15,7 +15,7 @@ class Node(object):
 
 
 class Trie(Node):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__(None)
 
     def __contains__(self, key):
