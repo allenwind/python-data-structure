@@ -2,11 +2,11 @@
 
 class Element:
 
-    def __init__(self, next=None, prev=None, list=None, value=None):
-        self._next = next 
-        self._prev = prev
-        self._list = list 
+    def __init__(self, value, next_=None, prev=None, list_=None):
         self._value = value
+        self._next = next_
+        self._prev = prev
+        self._list = list_
 
     def __repr__(self):
         return "<Element value:%s>" % self._value
